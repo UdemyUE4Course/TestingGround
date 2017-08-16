@@ -7,11 +7,10 @@
 AGun::AGun() {
 	// Create a gun mesh component
 	Gun = CreateDefaultSubobject<USkeletalMeshComponent>( TEXT( "FP_Gun" ) );
-	Gun->SetOnlyOwnerSee( true );			// only the owning player will see this mesh
 	Gun->bCastDynamicShadow = false;
 	Gun->CastShadow = false;
 	// FP_Gun->SetupAttachment(Mesh1P, TEXT("GripPoint"));
-	Gun->SetupAttachment( RootComponent );
+	RootComponent = Gun;
 
 	MuzzleLocation = CreateDefaultSubobject<USceneComponent>( TEXT( "MuzzleLocation" ) );
 	MuzzleLocation->SetupAttachment( Gun );
@@ -21,8 +20,6 @@ AGun::AGun() {
 // Called when the game starts or when spawned
 void AGun::BeginPlay() {
 	Super::BeginPlay();
-
-	// Gun->AttachToComponent( Mesh1P, FAttachmentTransformRules( EAttachmentRule::SnapToTarget, true ), TEXT( "GripPoint" ) );
 }
 
 void AGun::OnFire() {
